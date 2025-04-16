@@ -1,3 +1,7 @@
+# Part 0 - Exercises
+
+#### Exercise 4
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -25,3 +29,4 @@ sequenceDiagram
     activate server
     server-->>browser: [{ "content": "HTML is Easy", "date": "2023-1-1" }, ... ]
     deactivate server
+```
