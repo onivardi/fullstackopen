@@ -7,7 +7,7 @@ sequenceDiagram
 
     browser->>server: POST https://https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    Note left of browser: Data submitted
+    Note right of browser: Data submitted
     Note right of server: The server asks the browser to perform a new HTTP GET
     server-->>browser: HTTP 302
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
