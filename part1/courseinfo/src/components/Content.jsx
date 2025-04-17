@@ -1,15 +1,11 @@
-export const Content = (props) => {
+import { Part } from "./Part";
+
+export const Content = ({ parts }) => {
   return (
     <div>
-      <p>
-        {props.course.parts[0].name} {props.course.parts[0].exercises}
-      </p>
-      <p>
-        {props.course.parts[1].name} {props.course.parts[1].exercises}
-      </p>
-      <p>
-        {props.course.parts[2].name} {props.course.parts[2].exercises}
-      </p>
+      {parts.map((part) => (
+        <Part key={part.id} part={part} />
+      ))}
     </div>
   );
 };

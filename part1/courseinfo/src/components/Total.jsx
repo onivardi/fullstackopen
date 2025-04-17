@@ -1,10 +1,9 @@
-export const Total = (props) => {
-  const exercises1 = props.course.parts[0].exercises;
-  const exercises2 = props.course.parts[1].exercises;
-  const exercises3 = props.course.parts[2].exercises;
+export const Total = ({ parts }) => {
+  const totalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
+
   return (
     <div>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <h4>total of {totalExercises} exercises</h4>
     </div>
   );
 };
