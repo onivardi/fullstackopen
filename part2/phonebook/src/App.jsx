@@ -61,16 +61,40 @@ const App = () => {
         setSuccessMessage(`Added ${newName}`);
         setTimeout(() => {
           setSuccessMessage(null);
-        }, 50000);
+        }, 5000);
+      })
+      .catch((error) => {
+        setErrorMessage(
+          `Information of ${newName} has already been removed from server`
+        );
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
       });
   };
 
   const delPerson = (id) => {
     const person = persons.find((person) => person.id === id);
     if (window.confirm(`Delete ${person.name} ?`)) {
-      phoneBookService.exclude(id).then(() => {
-        setPersons(persons.filter((person) => person.id !== id));
-      });
+      phoneBookService
+        .exclude(id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id));
+        })
+        .then(() => {
+          setSuccessMessage(`Deleted ${person.name}`);
+          setTimeout(() => {
+            setSuccessMessage(null);
+          }, 5000);
+        })
+        .catch((error) => {
+          setErrorMessage(
+            `Information of ${person.name} has already been removed from server`
+          );
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
+        });
     }
   };
 
@@ -87,7 +111,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={successMessage} />
+      <Notification message={successMessage} error={false} />
+      <Notification message={errorMessage} error={true} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm
