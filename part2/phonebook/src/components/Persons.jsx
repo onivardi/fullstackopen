@@ -1,6 +1,6 @@
 import { Person } from "./Person";
 
-export const Persons = ({ persons, filter, handleFilterChange }) => {
+export const Persons = ({ persons, filter, delPerson }) => {
   const filteredPersons = persons.filter((person) =>
     person.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -9,7 +9,7 @@ export const Persons = ({ persons, filter, handleFilterChange }) => {
     <ul>
       {filteredPersons.map((person, index) => (
         <li key={index}>
-          <Person person={person} />
+          <Person person={person} delPerson={delPerson} />
         </li>
       ))}
     </ul>

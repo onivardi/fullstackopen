@@ -1,7 +1,10 @@
-export const Person = ({ person }) => {
+export const Person = ({ person, delPerson }) => {
   return (
     <>
-      {person.name} {person.number}{" "}
+      {person.name} {person.number} {""}
+      <button type="submit" onClick={() => delPerson(person.id)}>
+        delete
+      </button>
     </>
   );
 };

@@ -33,7 +33,7 @@ const App = () => {
     const personObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1,
+      id: String(persons.length + 1),
     };
 
     const nameExists = persons.some((person) => person.name === newName);
@@ -49,6 +49,15 @@ const App = () => {
     });
   };
 
+  const delPerson = (id) => {
+    const person = persons.find((person) => person.id === id);
+    if (window.confirm(`Delete ${person.name} ?`)) {
+      phoneBookService.exclude(id).then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+    }
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -62,11 +71,7 @@ const App = () => {
         addName={addPerson}
       />
       <h2>Numbers</h2>
-      <Persons
-        persons={persons}
-        filter={filter}
-        handleFilterChange={handleFilterChange}
-      />
+      <Persons persons={persons} filter={filter} delPerson={delPerson} />
     </div>
   );
 };
