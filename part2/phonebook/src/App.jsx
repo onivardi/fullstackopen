@@ -38,7 +38,12 @@ const App = () => {
 
     const nameExists = persons.some((person) => person.name === newName);
     if (nameExists) {
-      alert(`${newName} is already added to phonebook`);
+      alert(
+        `${newName} is already added to phonebook, replace the old number with a new one?`
+      );
+      const person = persons.find((person) => person.name === newName);
+      const updatedPerson = { ...person, number: personObject.number };
+      updatePerson(person.id, updatedPerson);
       return;
     }
 
@@ -56,6 +61,16 @@ const App = () => {
         setPersons(persons.filter((person) => person.id !== id));
       });
     }
+  };
+
+  const updatePerson = (id, updatedPerson) => {
+    phoneBookService.update(id, updatedPerson).then((returnedPerson) => {
+      setPersons(
+        persons.map((person) => (person.id !== id ? person : returnedPerson))
+      );
+      setNewName("");
+      setNewNumber("");
+    });
   };
 
   return (
